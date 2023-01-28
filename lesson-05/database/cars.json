@@ -1,0 +1,23 @@
+[
+  {
+    "id": "67ffd68d-a29c-4e51-8f58-810d0c0f214b",
+    "name": "911",
+    "releaseYear": 2022,
+    "available": true,
+    "gasAvailable": true
+  },
+  {
+    "id": "e12dfa66-0784-490c-bbec-6396bd439ddf",
+    "name": "Aventador",
+    "releaseYear": 2022,
+    "available": true,
+    "gasAvailable": true
+  },
+  {
+    "id": "84dc909e-b564-4bf7-984c-26791a77fe2e",
+    "name": "Sentra",
+    "releaseYear": 2022,
+    "available": true,
+    "gasAvailable": true
+  }
+]
