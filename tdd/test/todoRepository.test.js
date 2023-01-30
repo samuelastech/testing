@@ -18,7 +18,17 @@ describe('todoRepository', () => {
     });
 
     it('should call "insertOne" from lokijs', () => {
+      const functionName = 'insertOne';
+      const expectedReturn = true;
 
+      // Changing function behavior
+      sandbox.stub(todoRepository.schedule, functionName).returns(expectedReturn);
+
+      const data = { name: 'Erick' };
+
+      const result = todoRepository.create(data);
+      expect(result).to.be.deep.equal(expectedReturn);
+      expect(todoRepository.schedule[functionName].calledOnceWithExactly(data)).to.be.ok
     });
 
     it('should call "find" from lokijs', () => {
