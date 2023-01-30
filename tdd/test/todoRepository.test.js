@@ -4,18 +4,19 @@ const { createSandbox } = require('sinon');
 const TodoRepository = require('../src/todoRepository');
 
 describe('todoRepository', () => {
+  let todoRepository;
+  let sandbox;
+
+  before(() => {
+    todoRepository = new TodoRepository();
+    sandbox = createSandbox();
+  });
+
+  afterEach(() => {
+    sandbox.restore();
+  });
+
   describe('methods signature', () => {
-    let todoRepository;
-    let sandbox;
-
-    before(() => {
-      todoRepository = new TodoRepository();
-      sandbox = createSandbox();
-    });
-
-    afterEach(() => {
-      sandbox.restore();
-    });
 
     it('should call "insertOne" from lokijs', () => {
       const functionName = 'insertOne';
