@@ -34,7 +34,15 @@ describe('todo', () => {
 
       const todo = new Todo(data);
       const result = todo.isValid();
+
+      const expectedTodo = {
+        text: data.text,
+        when: data.when,
+        status: '',
+        id: todo.id
+      };
       expect(result).to.be.ok;
+      expect(todo).to.be.deep.equal(expectedTodo);
     });
   });
 });

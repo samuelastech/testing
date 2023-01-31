@@ -90,9 +90,29 @@ describe('todoService', () => {
         ...data,
         status: 'late',
       };
+
       expect(todoService.todoRepository.create.calledOnceWithExactly(expectedCallWith)).to.be.ok;
     });
 
-    it('should save todo item with pending status when "date" property is further than today', () => { });
+    it('should save todo item with pending status when "date" property is further than today', () => {
+      const properties = {
+        text: 'I must walk my dog',
+        when: new Date('2020-12-01 12:00:00 GMT-0'),
+      };
+
+      const today = new Date('2020-11-01');
+      sandbox.useFakeTimers(today.getTime());
+
+      const data = new Todo(properties);
+      const id = Todo.id;
+      todoService.create(data);
+
+      const expectedCallWith = {
+        ...data,
+        status: 'pending',
+      };
+
+      expect(todoService.todoRepository.create.calledOnceWithExactly(expectedCallWith)).to.be.ok;
+    });
   });
 });
