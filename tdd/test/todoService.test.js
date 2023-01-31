@@ -51,6 +51,10 @@ describe('todoService', () => {
       todoService = new TodoService(dependencies);
     });
 
+    afterEach(() => {
+      sandbox.restore();
+    });
+
     it('should not save todo item with invalid data', () => {
       const data = new Todo({
         text: '',
@@ -70,7 +74,23 @@ describe('todoService', () => {
     });
 
     it('should save todo item with late status when "date" property is before than today', () => {
+      const properties = {
+        text: 'I must walk my dog',
+        when: new Date('2020-12-01 12:00:00 GMT-0'),
+      };
 
+      const today = new Date('2020-12-02');
+      sandbox.useFakeTimers(today.getTime());
+
+      const data = new Todo(properties);
+      const id = Todo.id;
+      todoService.create(data);
+
+      const expectedCallWith = {
+        ...data,
+        status: 'late',
+      };
+      expect(todoService.todoRepository.create.calledOnceWithExactly(expectedCallWith)).to.be.ok;
     });
 
     it('should save todo item with pending status when "date" property is further than today', () => { });
